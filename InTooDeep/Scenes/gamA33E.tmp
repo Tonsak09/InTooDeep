@@ -121,7 +121,6 @@ label_settings = SubResource("LabelSettings_ivfw8")
 [node name="Hallway" type="Sprite2D" parent="HallwayFolder"]
 
 [node name="Character" type="Sprite2D" parent="HallwayFolder"]
-visible = false
 material = ExtResource("10_vqmyo")
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("3_extqw")

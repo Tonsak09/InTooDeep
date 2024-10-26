@@ -19,12 +19,23 @@ enum GameStates
 @export var moneyLoss : float 
 
 
-@export_category("Characters")
-@export var clientTextures : Array[Texture2D]
+@export_category("Clients")
+@export var clientOutlineTextures : Array[Texture2D]
+@export var clientDisplayTextures : Array[Texture2D]
+@export var clientCandyTextures : Array[Texture2D]
+@export var clientDrugsTextures : Array[Texture2D]
 @export var clientText : Array[String]
-@export var copTextures : Array[Texture2D]
-@export var copText : Array[String]
-@export var childTextures : Array[Texture2D]
+@export_category("Detective")
+@export var detectiveOutlineTextures : Array[Texture2D]
+@export var detectiveDisplayTextures : Array[Texture2D]
+@export var detectiveCandyTextures : Array[Texture2D]
+@export var detectiveDrugsTextures : Array[Texture2D]
+@export var detectiveText : Array[String]
+@export_category("Children")
+@export var childOutlineTextures : Array[Texture2D]
+@export var childDisplayTextures : Array[Texture2D]
+@export var childCandyTextures : Array[Texture2D]
+@export var childDrugsTextures : Array[Texture2D]
 @export var childText : Array[String]
 
 @export_category("Scene Folders")
@@ -39,18 +50,20 @@ enum GameStates
 
 @export_category("Timers")
 @export var ditherTimer : Timer
+@export var pauseTimer : Timer 
 
 @export_category("Curves")
-@export var ditherCurve : Curve
+@export var ditherInCurve : Curve
+@export var ditherOutCurve : Curve
 
-@export_category("Sprites")
+@export_category("Character Rendering")
 @export var characterSprite : Sprite2D
+@export var characterShaderMaterial : ShaderMaterial
 
 @export_category("Dialogue")
 @export var childIntro : Array[String]
 @export var clientIntro : Array[String]
 @export var copIntro : Array[String] # Will also use intros of other characters 
-
 
 @export_category("Debug")
 @export var stateLabel : Label
@@ -58,6 +71,7 @@ enum GameStates
 @export var moneyLabel : Label
 
 
+var charVarient : int 
 var currChar : CharacterType;
 enum CharacterType 
 {
@@ -67,10 +81,12 @@ enum CharacterType
 }
 
 var isCorrect : bool
+var isCandy : bool 
 var money : float 
 
 func _ready():
 	isCorrect = true 
+	isCandy = true 
 	money = 50.0;
 
 func _process(delta):
@@ -131,6 +147,8 @@ func StartScreen_State():
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		startScreen.visible = false
+		btns.visible = true
+		characterSprite.visible = true
 		
 		ResetGame()
 		gameState = GameStates.KNOCK
@@ -142,7 +160,6 @@ func Knock_State():
 	knockAudio.play(); # Play audio 
 	
 	ResetGame()
-	
 	gameState = GameStates.FADING_TO_OUT;
 
 # Animates the door ditherring out and the 
@@ -150,6 +167,7 @@ func Knock_State():
 # characters activates their dialogue 
 func FadingToOut_State():
 	var l = 1.0 - (ditherTimer.time_left / ditherTimer.wait_time)
+	SetCharacterDither(ditherOutCurve.sample(l) * 2.0);
 	
 	if(l >= 1.0):
 		# Play audio 
@@ -164,10 +182,27 @@ func OutlineCharacter_State():
 # in 
 func ResultCharacter_State():
 	
-	btns.visible = false; 
-	contAdvice.visible = true 
-	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if pauseTimer.is_stopped():
+		contAdvice.visible = true 
+		
+		# Set to holding item 
+		match currChar:
+			CharacterType.CHILD: 
+				if isCandy:
+					SetCharacterTexture(childCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(childDrugsTextures[charVarient])
+			CharacterType.CLIENT:
+				if isCandy:
+					SetCharacterTexture(clientCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(clientDrugsTextures[charVarient])
+			CharacterType.COP:
+				if isCandy:
+					SetCharacterTexture(detectiveCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(detectiveDrugsTextures[charVarient])
+		
 		# Check bool if correct or incorrect 
 		contAdvice.visible = false 
 		
@@ -176,13 +211,22 @@ func ResultCharacter_State():
 			gameState = GameStates.FADING_TO_IN
 		else:
 			gameState = GameStates.GAME_OVER
+			
+	else:
+		match currChar:
+			CharacterType.CHILD:
+				SetCharacterTexture(childDisplayTextures[charVarient])
+			CharacterType.CLIENT:
+				SetCharacterTexture(clientDisplayTextures[charVarient])
+			CharacterType.COP:
+				SetCharacterTexture(detectiveDisplayTextures[charVarient])
 
 # Character fades away along with key hole.
 # Then door fades back in 
 func FadingToIn_State():
-	var l = 1.0 - (ditherTimer.time_left / ditherTimer.wait_time)
-	
-	if(l >= 1.0):
+	var l = (ditherTimer.time_left / ditherTimer.wait_time)
+	SetCharacterDither(ditherInCurve.sample(l) * 2.0);
+	if(1.0 - l >= 1.0):
 		# Play audio 
 		# Activate character text 
 		gameState = GameStates.KNOCK
@@ -196,33 +240,45 @@ func GameOver_State():
 func ResetGame():
 	var character = randi_range(0, 2) 
 	currChar = character
+	
 	# Set charactter texture 
-
-
-
-
-
+	match currChar:
+		CharacterType.CHILD:
+			charVarient = randi_range(0, childOutlineTextures.size() - 1) # Sets variant 
+			#characterSprite.texture = childOutlineTextures[charVarient]
+			SetCharacterTexture(childOutlineTextures[charVarient])
+		CharacterType.CLIENT:
+			charVarient = randi_range(0, clientOutlineTextures.size() - 1) # Sets variant 
+			#characterSprite.texture = clientOutlineTextures[charVarient]
+			SetCharacterTexture(clientOutlineTextures[charVarient])
+		CharacterType.COP:
+			charVarient = randi_range(0, detectiveOutlineTextures.size() - 1) # Sets variant 
+			#characterSprite.texture = detectiveOutlineTextures[charVarient]
+			SetCharacterTexture(detectiveOutlineTextures[charVarient])
 
 
 func OnCandyBtn():
 	if gameState != GameStates.OUTLINE_CHARACTER:
 		return
-	
+	isCandy = true 
 	# Is correct choice? 
 	match currChar:
 		CharacterType.CHILD:
 			gameState = GameStates.RESULT_CHARACTER
+			pauseTimer.start()
 		CharacterType.CLIENT:
 			money -= moneyLoss
 			gameState = GameStates.RESULT_CHARACTER 
+			pauseTimer.start()
 		CharacterType.COP:
 			gameState = GameStates.RESULT_CHARACTER 
+			pauseTimer.start()
 	
 
 func OnContrabandBtn():
 	if gameState != GameStates.OUTLINE_CHARACTER:
 		return
-	
+	isCandy = false 
 	# Is correct choice? 
 	match currChar:
 		CharacterType.CHILD:
@@ -230,6 +286,13 @@ func OnContrabandBtn():
 		CharacterType.CLIENT:
 			money += moneyGain
 			gameState = GameStates.RESULT_CHARACTER
+			pauseTimer.start()
 		CharacterType.COP:
 			gameState = GameStates.GAME_OVER 
 
+func SetCharacterTexture(text : Texture):
+	characterSprite.texture = text
+	characterSprite.material.set_shader_parameter("MainTexture", text)
+
+func SetCharacterDither(dither : float):
+	characterSprite.material.set_shader_parameter("Dither", dither)

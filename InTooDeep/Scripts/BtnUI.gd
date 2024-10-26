@@ -7,6 +7,9 @@ extends Button
 
 @export var scaleMult : float
 
+@export var clickTimer : Timer 
+@export var clickCurve : Curve
+
 var isHover : bool
 var isClicked : bool
 
@@ -25,6 +28,16 @@ func _process(delta):
 		hoverL =  clamp(hoverL - (hoverScaleSpeed * delta), 0, 1)
 	
 	var s = lerp(1.0, maxScaleHover, hoverCurve.sample(hoverL))
+	
+	if isClicked:
+		var l = 1.0 - (clickTimer.time_left / clickTimer.wait_time)
+		
+		if l >= 1.0:
+			isClicked = false 
+		else:
+			l = clickCurve.sample(l)
+			s -= l * targetScaleModClick
+	
 	scale = Vector2(scaleMult * s, s)
 
 func OnHover():
@@ -32,3 +45,7 @@ func OnHover():
 
 func OnLeave():
 	isHover = false 
+
+func OnClick():
+	clickTimer.start()
+	isClicked = true 
