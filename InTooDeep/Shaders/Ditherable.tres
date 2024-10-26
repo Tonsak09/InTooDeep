@@ -1,0 +1,134 @@
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://cr27ytek3rite"]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_pe6cc"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 0.0]
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_at73v"]
+default_input_values = [1, 1.0, 2, 2.0, 3, 0.0, 4, 1.0]
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_eea6u"]
+function = 31
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_tbuqn"]
+operator = 7
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_1l4ls"]
+parameter_name = "MainTexture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sc8mm"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_vubjf"]
+parameter_name = "DitherTexture"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_po26b"]
+parameter_name = "Dither"
+hint = 1
+max = 2.0
+default_value = 0.042
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_8hbk2"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fk8kj"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_eu7wf"]
+function = 18
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D MainTexture;
+uniform sampler2D DitherTexture;
+uniform float Dither : hint_range(0, 2);
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(MainTexture, UV);
+	float n_out3p4 = n_out3p0.a;
+
+
+	vec4 n_out8p0;
+// Texture2D:8
+	n_out8p0 = texture(DitherTexture, UV);
+	float n_out8p1 = n_out8p0.r;
+
+
+// FloatOp:14
+	float n_out14p0 = min(n_out3p4, n_out8p1);
+
+
+// FloatParameter:5
+	float n_out5p0 = Dither;
+
+
+	float n_out12p0;
+// Remap:12
+	float n_in12p1 = 1.00000;
+	float n_in12p2 = 2.00000;
+	float n_in12p3 = 0.00000;
+	float n_in12p4 = 1.00000;
+	{
+		float __input_range = n_in12p2 - n_in12p1;
+		float __output_range = n_in12p4 - n_in12p3;
+		n_out12p0 = n_in12p3 + __output_range * ((n_out5p0 - n_in12p1) / __input_range);
+	}
+
+
+// FloatFunc:13
+	float n_out13p0 = 1.0 - n_out12p0;
+
+
+// Mix:10
+	float n_out10p0 = mix(n_out3p4, n_out14p0, n_out13p0);
+
+
+// FloatFunc:9
+	float n_out9p0 = min(max(n_out5p0, 0.0), 1.0);
+
+
+// Mix:7
+	float n_in7p0 = 0.00000;
+	float n_out7p0 = mix(n_in7p0, n_out10p0, n_out9p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0.xyz);
+	COLOR.a = n_out7p0;
+
+
+}
+"
+graph_offset = Vector2(-1064.44, -54.6258)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(480, 180)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_1l4ls")
+nodes/fragment/2/position = Vector2(-760, -240)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_sc8mm")
+nodes/fragment/3/position = Vector2(-500, 20)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_vubjf")
+nodes/fragment/4/position = Vector2(-880, 100)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_po26b")
+nodes/fragment/5/position = Vector2(-740, 620)
+nodes/fragment/7/node = SubResource("VisualShaderNodeMix_8hbk2")
+nodes/fragment/7/position = Vector2(180, 320)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_fk8kj")
+nodes/fragment/8/position = Vector2(-520, 220)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatFunc_eu7wf")
+nodes/fragment/9/position = Vector2(-140, 620)
+nodes/fragment/10/node = SubResource("VisualShaderNodeMix_pe6cc")
+nodes/fragment/10/position = Vector2(-20, 180)
+nodes/fragment/12/node = SubResource("VisualShaderNodeRemap_at73v")
+nodes/fragment/12/position = Vector2(-420, 400)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatFunc_eea6u")
+nodes/fragment/13/position = Vector2(-240, 400)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFloatOp_tbuqn")
+nodes/fragment/14/position = Vector2(-280, 220)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 8, 2, 9, 0, 7, 2, 5, 0, 9, 0, 3, 4, 10, 0, 10, 0, 7, 1, 5, 0, 12, 0, 12, 0, 13, 0, 13, 0, 10, 2, 7, 0, 0, 1, 3, 0, 0, 0, 3, 4, 14, 0, 8, 1, 14, 1, 14, 0, 10, 1)
