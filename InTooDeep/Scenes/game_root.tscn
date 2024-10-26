@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=10 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
-[ext_resource type="Shader" uid="uid://cr27ytek3rite" path="res://Shaders/Ditherable.tres" id="3_ylbqj"]
-[ext_resource type="Texture2D" uid="uid://dpws81flp42ls" path="res://Textures/Noise.png" id="4_d2bau"]
-[ext_resource type="Texture2D" uid="uid://bgcvropl2ir6" path="res://Textures/icon.svg" id="5_cyvqb"]
-[ext_resource type="Script" path="res://Scripts/DitherLoop.gd" id="6_t2klj"]
+[ext_resource type="Texture2D" uid="uid://mo7u7un76646" path="res://Textures/BtnHalf.png" id="3_3vro2"]
+[ext_resource type="Script" path="res://Scripts/BtnUI.gd" id="4_jebci"]
 
 [sub_resource type="Curve" id="Curve_wgy1m"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -19,22 +17,28 @@ font_size = 48
 shadow_size = 6
 shadow_color = Color(0, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i01or"]
-shader = ExtResource("3_ylbqj")
-shader_parameter/Dither = 2.0
-shader_parameter/MainTexture = ExtResource("5_cyvqb")
-shader_parameter/DitherTexture = ExtResource("4_d2bau")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u57l6"]
+
+[sub_resource type="Curve" id="Curve_kvx2c"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="GameRoot" type="Node2D"]
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("startScreen", "hallway", "inside", "knockAudio", "ditherTimer")]
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("startScreen", "btns", "contAdvice", "inside", "knockAudio", "ditherTimer", "stateLabel", "charLabel", "moneyLabel")]
 script = ExtResource("2_cxvrx")
+moneyGain = 60.0
+moneyLoss = 25.0
 startScreen = NodePath("../StartScreen")
-hallway = NodePath("../HallwayFolder")
+btns = NodePath("../HallwayFolder/Buttons")
+contAdvice = NodePath("../HallwayFolder/Contninue Advice")
 inside = NodePath("../InsideFolder")
 knockAudio = NodePath("KnockAudio")
 ditherTimer = NodePath("DitherTimer")
 ditherCurve = SubResource("Curve_wgy1m")
+stateLabel = NodePath("../DebugInfo/StateLabel")
+charLabel = NodePath("../DebugInfo/CharacterLabel")
+moneyLabel = NodePath("../DebugInfo/MoneyLabel")
 
 [node name="KnockAudio" type="AudioStreamPlayer2D" parent="GameManager"]
 stream = SubResource("AudioStreamRandomizer_owir7")
@@ -53,9 +57,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -161.0
+offset_left = -85.0
 offset_top = -204.0
-offset_right = -1.0
+offset_right = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "IN
@@ -65,27 +69,17 @@ DEEP
 label_settings = SubResource("LabelSettings_ivfw8")
 
 [node name="HallwayFolder" type="Node2D" parent="."]
-visible = false
+
+[node name="Hallway" type="Sprite2D" parent="HallwayFolder"]
+
+[node name="Character" type="Sprite2D" parent="HallwayFolder"]
 
 [node name="Buttons" type="Control" parent="HallwayFolder"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button2" type="Button" parent="HallwayFolder/Buttons"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = 126.0
-offset_right = 60.0
-offset_bottom = 166.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -103,25 +97,158 @@ offset_bottom = 166.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button4" type="Button" parent="HallwayFolder/Buttons"]
+[node name="Label" type="Label" parent="HallwayFolder/Buttons/Button3"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 40.0
+text = "Candy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="HallwayFolder/Buttons"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 80.0
+offset_left = 60.0
 offset_top = 126.0
-offset_right = 200.0
+offset_right = 180.0
 offset_bottom = 166.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Label" type="Label" parent="HallwayFolder/Buttons/Button2"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 40.0
+text = "Contraband"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Contninue Advice" type="Control" parent="HallwayFolder"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Anywhere To Continue" type="Label" parent="HallwayFolder/Contninue Advice"]
+layout_mode = 0
+offset_left = -105.0
+offset_top = 239.0
+offset_right = 105.0
+offset_bottom = 262.0
+text = "Click anywhere to continue"
+horizontal_alignment = 1
+
 [node name="InsideFolder" type="Node2D" parent="."]
 visible = false
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_i01or")
-texture = ExtResource("5_cyvqb")
-script = ExtResource("6_t2klj")
-mat = SubResource("ShaderMaterial_i01or")
+[node name="Door" type="Sprite2D" parent="InsideFolder"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Candy" type="Button" parent="Control"]
+clip_contents = true
+layout_mode = 0
+offset_left = -104.0
+offset_bottom = 208.0
+theme_override_colors/icon_normal_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_colors/icon_pressed_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_colors/icon_hover_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u57l6")
+flat = true
+script = ExtResource("4_jebci")
+maxScaleHover = 1.1
+hoverScaleSpeed = 8.0
+hoverCurve = SubResource("Curve_kvx2c")
+scaleMult = 1.0
+
+[node name="Timer" type="Timer" parent="Control/Candy"]
+wait_time = 0.1
+one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/Candy"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 204.0
+offset_bottom = 204.0
+texture = ExtResource("3_3vro2")
+
+[node name="Contrband" type="Button" parent="Control"]
+clip_contents = true
+offset_left = 104.0
+offset_right = 208.0
+offset_bottom = 208.0
+scale = Vector2(-1, 1)
+theme_override_colors/icon_normal_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_colors/icon_pressed_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_colors/icon_hover_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.933333, 0.4, 0.65098, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u57l6")
+flat = true
+script = ExtResource("4_jebci")
+maxScaleHover = 1.1
+hoverScaleSpeed = 8.0
+hoverCurve = SubResource("Curve_kvx2c")
+scaleMult = -1.0
+
+[node name="Timer" type="Timer" parent="Control/Contrband"]
+wait_time = 0.1
+one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/Contrband"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 204.0
+offset_bottom = 204.0
+texture = ExtResource("3_3vro2")
+
+[node name="DebugInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StateLabel" type="Label" parent="DebugInfo"]
+layout_mode = 0
+offset_left = -562.0
+offset_top = -309.0
+offset_right = -522.0
+offset_bottom = -286.0
+text = "0"
+
+[node name="CharacterLabel" type="Label" parent="DebugInfo"]
+layout_mode = 0
+offset_left = -562.0
+offset_top = -287.51
+offset_right = -522.0
+offset_bottom = -264.51
+text = "0"
+
+[node name="MoneyLabel" type="Label" parent="DebugInfo"]
+layout_mode = 0
+offset_left = -562.0
+offset_top = -268.0
+offset_right = -522.0
+offset_bottom = -245.0
+text = "0"
+
+[connection signal="pressed" from="HallwayFolder/Buttons/Button3" to="GameManager" method="OnCandyBtn"]
+[connection signal="pressed" from="HallwayFolder/Buttons/Button2" to="GameManager" method="OnContrabandBtn"]
+[connection signal="mouse_entered" from="Control/Candy" to="Control/Candy" method="OnHover"]
+[connection signal="mouse_exited" from="Control/Candy" to="Control/Candy" method="OnLeave"]
+[connection signal="mouse_entered" from="Control/Contrband" to="Control/Contrband" method="OnHover"]
+[connection signal="mouse_exited" from="Control/Contrband" to="Control/Contrband" method="OnLeave"]
