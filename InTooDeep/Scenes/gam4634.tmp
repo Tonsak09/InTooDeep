@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=56 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
@@ -41,14 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://bhe6w1p0lj7v3" path="res://Textures/Fish/TrenchcoatInvestigator_Drugs_Fish-Eye.png" id="21_t4kow"]
 [ext_resource type="Texture2D" uid="uid://bjp3t3h0ewkgf" path="res://Textures/Fish/TrenchcoatKid_Candy_Fish-Eye.png" id="22_2qt1s"]
 [ext_resource type="Texture2D" uid="uid://b5iolpu5xt8t3" path="res://Textures/Fish/TrenchcoatKid_Drugs_Fish-Eye.png" id="25_1bv3e"]
-[ext_resource type="AudioStream" uid="uid://cn4gsysj4w70g" path="res://Audio/Knock1.mp3" id="34_4tdla"]
-[ext_resource type="AudioStream" uid="uid://c3t236ipj0bdc" path="res://Audio/Knock2.mp3" id="35_mdygo"]
-[ext_resource type="AudioStream" uid="uid://cqys3kyhs1kcm" path="res://Audio/Knock3.mp3" id="36_d2tv0"]
 [ext_resource type="Texture2D" uid="uid://dfqm42idx5udy" path="res://Textures/SpeechBubble.png" id="42_o1vwg"]
-[ext_resource type="Script" path="res://Scripts/Speech.gd" id="43_it8fs"]
-[ext_resource type="AudioStream" uid="uid://bqtqysjpusse" path="res://Audio/342200__christopherderp__videogame-menu-button-click.wav" id="44_cxrlv"]
-[ext_resource type="AudioStream" uid="uid://c1q6hlstxf2ih" path="res://Audio/582594__nezuai__ui-sound-11.wav" id="45_hmenx"]
-[ext_resource type="AudioStream" uid="uid://bf1qgqbrsxfj4" path="res://Audio/582595__nezuai__ui-sound-10.wav" id="46_wtbat"]
 
 [sub_resource type="Curve" id="Curve_57yx1"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -59,13 +52,6 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_owir7"]
-streams_count = 3
-stream_0/stream = ExtResource("34_4tdla")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("35_mdygo")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("36_d2tv0")
-stream_2/weight = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u57l6"]
 
@@ -90,11 +76,6 @@ point_count = 2
 font = ExtResource("6_4x8ug")
 font_size = 36
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4f3wc"]
-streams_count = 1
-stream_0/stream = ExtResource("44_cxrlv")
-stream_0/weight = 1.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_1qt4a"]
 font = ExtResource("6_4x8ug")
 font_size = 24
@@ -115,7 +96,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="GameRoot" type="Node2D"]
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("moneyDis", "startScreen", "btns", "contAdvice", "inside", "gameOver", "knockAudio", "goodAudio", "badAudio", "ditherTimer", "pauseTimer", "countdownTimer", "countTimerBar", "characterSprite", "dialogueManager", "finalScore", "finalTime", "stateLabel", "charLabel", "moneyLabel")]
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("moneyDis", "startScreen", "btns", "contAdvice", "inside", "gameOver", "knockAudio", "ditherTimer", "pauseTimer", "countdownTimer", "countTimerBar", "characterSprite", "finalScore", "finalTime", "stateLabel", "charLabel", "moneyLabel")]
 script = ExtResource("2_cxvrx")
 moneyGain = 60.0
 moneyLoss = 25.0
@@ -138,8 +119,6 @@ contAdvice = NodePath("../StartScreen/Contninue Advice")
 inside = NodePath("../InsideFolder")
 gameOver = NodePath("../EndScreen")
 knockAudio = NodePath("KnockAudio")
-goodAudio = NodePath("GoodAudio")
-badAudio = NodePath("BadAudio")
 ditherTimer = NodePath("DitherTimer")
 pauseTimer = NodePath("PauseDisplayTimer")
 countdownTimer = NodePath("Countdown Timer")
@@ -147,23 +126,11 @@ countTimerBar = NodePath("../HallwayFolder/Control/Timebar")
 ditherInCurve = SubResource("Curve_57yx1")
 ditherOutCurve = SubResource("Curve_25ytx")
 characterSprite = NodePath("../HallwayFolder/HallwayRenderables/Character")
-dialogueManager = NodePath("../SpeechBubble")
-childIntro = Array[String](["Trick or treat!", "Gimme the stuff! *sniffles*", "Trick or treat! ^treat!", "Twick or tweat!", "Twix or twees!"])
-clientIntro = Array[String](["You got the stuff? *coughs*", "Tricks and treats.", "You know why I'm here", "Hand it over", "I'm who you're waiting for"])
-copIntro = Array[String](["Trick or treat.", "Gee, whatcha got here?", "Got the good stuff?", "Oh, don't mind me", "My wife tells me you're the type I'm looking for"])
 finalScore = NodePath("../EndScreen/FinalSCore")
 finalTime = NodePath("../EndScreen/Time")
 stateLabel = NodePath("../DebugInfo/StateLabel")
 charLabel = NodePath("../DebugInfo/CharacterLabel")
 moneyLabel = NodePath("../DebugInfo/MoneyLabel")
-
-[node name="GoodAudio" type="AudioStreamPlayer2D" parent="GameManager"]
-position = Vector2(-1, 315)
-stream = ExtResource("45_hmenx")
-
-[node name="BadAudio" type="AudioStreamPlayer2D" parent="GameManager"]
-position = Vector2(-1, 315)
-stream = ExtResource("46_wtbat")
 
 [node name="KnockAudio" type="AudioStreamPlayer2D" parent="GameManager"]
 stream = SubResource("AudioStreamRandomizer_owir7")
@@ -219,7 +186,7 @@ script = ExtResource("4_usxb0")
 childA = NodePath("Candy")
 childB = NodePath("Contrband")
 
-[node name="Candy" type="Button" parent="HallwayFolder/Control" node_paths=PackedStringArray("clickTimer", "sound")]
+[node name="Candy" type="Button" parent="HallwayFolder/Control" node_paths=PackedStringArray("clickTimer")]
 clip_contents = true
 layout_mode = 0
 offset_left = -105.0
@@ -239,7 +206,6 @@ targetScaleModClick = 0.1
 scaleMult = 1.0
 clickTimer = NodePath("Timer")
 clickCurve = SubResource("Curve_2xc3c")
-sound = NodePath("../AudioStreamPlayer2D")
 
 [node name="Timer" type="Timer" parent="HallwayFolder/Control/Candy"]
 wait_time = 0.1
@@ -263,7 +229,7 @@ offset_bottom = 119.0
 text = "CANDY"
 label_settings = SubResource("LabelSettings_a17ds")
 
-[node name="Contrband" type="Button" parent="HallwayFolder/Control" node_paths=PackedStringArray("clickTimer", "sound")]
+[node name="Contrband" type="Button" parent="HallwayFolder/Control" node_paths=PackedStringArray("clickTimer")]
 clip_contents = true
 layout_mode = 0
 offset_left = 115.0
@@ -284,7 +250,6 @@ targetScaleModClick = 0.1
 scaleMult = -1.0
 clickTimer = NodePath("Timer")
 clickCurve = SubResource("Curve_afi8x")
-sound = NodePath("../AudioStreamPlayer2D")
 
 [node name="Timer" type="Timer" parent="HallwayFolder/Control/Contrband"]
 wait_time = 0.1
@@ -327,9 +292,6 @@ offset_right = 191.0
 offset_bottom = 213.0
 label_settings = SubResource("LabelSettings_psf8a")
 horizontal_alignment = 1
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HallwayFolder/Control"]
-stream = SubResource("AudioStreamRandomizer_4f3wc")
 
 [node name="Buttons" type="Control" parent="HallwayFolder"]
 visible = false
@@ -525,11 +487,9 @@ offset_right = -522.0
 offset_bottom = -245.0
 text = "0"
 
-[node name="SpeechBubble" type="Sprite2D" parent="." node_paths=PackedStringArray("textLabel")]
+[node name="SpeechBubble" type="Sprite2D" parent="."]
 position = Vector2(-399, -420)
 texture = ExtResource("42_o1vwg")
-script = ExtResource("43_it8fs")
-textLabel = NodePath("Label")
 
 [node name="Label" type="Label" parent="SpeechBubble"]
 offset_left = -87.0
@@ -542,10 +502,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="SpeechBubble"]
-wait_time = 0.01
-autostart = true
-
 [connection signal="mouse_entered" from="HallwayFolder/Control/Candy" to="HallwayFolder/Control/Candy" method="OnHover"]
 [connection signal="mouse_exited" from="HallwayFolder/Control/Candy" to="HallwayFolder/Control/Candy" method="OnLeave"]
 [connection signal="pressed" from="HallwayFolder/Control/Candy" to="GameManager" method="OnCandyBtn"]
@@ -556,4 +512,3 @@ autostart = true
 [connection signal="pressed" from="HallwayFolder/Control/Contrband" to="HallwayFolder/Control/Contrband" method="OnClick"]
 [connection signal="pressed" from="HallwayFolder/Buttons/Button3" to="GameManager" method="OnCandyBtn"]
 [connection signal="pressed" from="HallwayFolder/Buttons/Button2" to="GameManager" method="OnContrabandBtn"]
-[connection signal="timeout" from="SpeechBubble/Timer" to="SpeechBubble" method="AddChar"]

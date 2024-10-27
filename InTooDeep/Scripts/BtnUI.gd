@@ -10,6 +10,8 @@ extends Button
 @export var clickTimer : Timer 
 @export var clickCurve : Curve
 
+@export var sound : AudioStreamPlayer2D
+
 var isHover : bool
 var isClicked : bool
 
@@ -49,3 +51,4 @@ func OnLeave():
 func OnClick():
 	clickTimer.start()
 	isClicked = true 
+	sound.play()

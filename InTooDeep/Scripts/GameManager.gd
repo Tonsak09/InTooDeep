@@ -17,6 +17,7 @@ enum GameStates
 @export_category("Money")
 @export var moneyGain : float
 @export var moneyLoss : float 
+@export var moneyDis : Label
 
 
 @export_category("Clients")
@@ -24,19 +25,16 @@ enum GameStates
 @export var clientDisplayTextures : Array[Texture2D]
 @export var clientCandyTextures : Array[Texture2D]
 @export var clientDrugsTextures : Array[Texture2D]
-@export var clientText : Array[String]
 @export_category("Detective")
 @export var detectiveOutlineTextures : Array[Texture2D]
 @export var detectiveDisplayTextures : Array[Texture2D]
 @export var detectiveCandyTextures : Array[Texture2D]
 @export var detectiveDrugsTextures : Array[Texture2D]
-@export var detectiveText : Array[String]
 @export_category("Children")
 @export var childOutlineTextures : Array[Texture2D]
 @export var childDisplayTextures : Array[Texture2D]
 @export var childCandyTextures : Array[Texture2D]
 @export var childDrugsTextures : Array[Texture2D]
-@export var childText : Array[String]
 
 @export_category("Scene Folders")
 @export var startScreen : Node2D
@@ -47,6 +45,8 @@ enum GameStates
 
 @export_category("Audio")
 @export var knockAudio : AudioStreamPlayer2D
+@export var goodAudio : AudioStreamPlayer2D
+@export var badAudio : AudioStreamPlayer2D
 
 @export_category("Timers")
 @export var ditherTimer : Timer
@@ -63,9 +63,15 @@ enum GameStates
 @export var characterShaderMaterial : ShaderMaterial
 
 @export_category("Dialogue")
+@export var dialogueManager : Node2D
+@export var typeSpeed : float 
 @export var childIntro : Array[String]
 @export var clientIntro : Array[String]
 @export var copIntro : Array[String] # Will also use intros of other characters 
+
+@export_category("Enddetails")
+@export var finalScore : Label
+@export var finalTime : Label
 
 @export_category("Debug")
 @export var stateLabel : Label
@@ -85,6 +91,9 @@ enum CharacterType
 var isCorrect : bool
 var isCandy : bool 
 var money : float 
+var time : float 
+
+var roundCount : int
 
 func _ready():
 	isCorrect = true 
@@ -92,8 +101,8 @@ func _ready():
 	money = 50.0;
 
 func _process(delta):
-	StateMachine()
-	DebugHelper()
+	StateMachine(delta)
+	#DebugHelper()
 
 func DebugHelper():
 	stateLabel.text = str(gameState)
@@ -124,12 +133,15 @@ func DebugHelper():
 	
 	moneyLabel.text = str(money)
 
-func StateMachine():
+func StateMachine(delta):
 	
 	if gameState != GameStates.START_SCREEN && gameState != GameStates.GAME_OVER:
+		time += delta 
+		
+		moneyDis.text = str(money)
+		
 		var interp = countdownTimer.time_left / countdownTimer.wait_time
 		countTimerBar.value = interp
-		print_debug(interp)
 		if interp <= 0.0:
 			gameState = GameStates.GAME_OVER
 	
@@ -154,12 +166,12 @@ func StateMachine():
 # they left-click 
 func StartScreen_State():
 	startScreen.visible = true 
+	dialogueManager.visible = false
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		startScreen.visible = false
 		btns.visible = true
 		characterSprite.visible = true
-		
 		ResetGame()
 		gameState = GameStates.KNOCK
 
@@ -168,6 +180,9 @@ func StartScreen_State():
 func Knock_State():
 	ditherTimer.start(); # Begin timer 
 	knockAudio.play(); # Play audio 
+	dialogueManager.visible = true 
+	
+	knockAudio.play()
 	
 	ResetGame()
 	gameState = GameStates.FADING_TO_OUT;
@@ -219,6 +234,7 @@ func ResultCharacter_State():
 		if isCorrect:
 			ditherTimer.start(); # Begin timer 
 			gameState = GameStates.FADING_TO_IN
+			goodAudio.play()
 		else:
 			gameState = GameStates.GAME_OVER
 			
@@ -243,6 +259,10 @@ func FadingToIn_State():
 
 # Game over stats fade in over screen 
 func GameOver_State():
+	gameOver.visible = true 
+	finalScore.text = "Final Score: " + str(money)
+	finalTime.text = "Time in Business: " + str(int(time)) + "s"
+	
 	match currChar:
 			CharacterType.CHILD: 
 				if isCandy:
@@ -259,13 +279,22 @@ func GameOver_State():
 					SetCharacterTexture(detectiveCandyTextures[charVarient])
 				else:
 					SetCharacterTexture(detectiveDrugsTextures[charVarient])
-
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		gameOver.visible = false
+		roundCount = 0
+		
+		ResetGame()
+		gameState = GameStates.START_SCREEN
 
 
 func ResetGame():
 	var character = randi_range(0, 2) 
 	currChar = character
 	countdownTimer.paused = false
+	roundCount += 1
+	countdownTimer.wait_time = lerp(15.0, 5.0, clamp(float(roundCount) / 10.0, 0.0, 1.0))
+	
 	countdownTimer.start()
 	 
 	# Set charactter texture 
@@ -274,14 +303,20 @@ func ResetGame():
 			charVarient = randi_range(0, childOutlineTextures.size() - 1) # Sets variant 
 			#characterSprite.texture = childOutlineTextures[charVarient]
 			SetCharacterTexture(childOutlineTextures[charVarient])
+			
+			dialogueManager.SetDialogue(childIntro[randi_range(0, childIntro.size() - 1)])
 		CharacterType.CLIENT:
 			charVarient = randi_range(0, clientOutlineTextures.size() - 1) # Sets variant 
 			#characterSprite.texture = clientOutlineTextures[charVarient]
 			SetCharacterTexture(clientOutlineTextures[charVarient])
+			
+			dialogueManager.SetDialogue(clientIntro[randi_range(0, clientIntro.size() - 1)])
 		CharacterType.COP:
 			charVarient = randi_range(0, detectiveOutlineTextures.size() - 1) # Sets variant 
 			#characterSprite.texture = detectiveOutlineTextures[charVarient]
 			SetCharacterTexture(detectiveOutlineTextures[charVarient])
+			
+			dialogueManager.SetDialogue(copIntro[randi_range(0, copIntro.size() - 1)])
 
 
 func OnCandyBtn():
@@ -310,12 +345,14 @@ func OnContrabandBtn():
 	match currChar:
 		CharacterType.CHILD:
 			gameState = GameStates.GAME_OVER
+			badAudio.play()
 		CharacterType.CLIENT:
 			money += moneyGain
 			gameState = GameStates.RESULT_CHARACTER
 			pauseTimer.start()
 		CharacterType.COP:
 			gameState = GameStates.GAME_OVER 
+			badAudio.play()
 
 func SetCharacterTexture(text : Texture):
 	characterSprite.texture = text
