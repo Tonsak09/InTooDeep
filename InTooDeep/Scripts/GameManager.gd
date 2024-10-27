@@ -261,7 +261,7 @@ func FadingToIn_State():
 # Game over stats fade in over screen 
 func GameOver_State():
 	gameOver.visible = true 
-	finalScore.text = "Final Score: " + str(money)
+	finalScore.text = "Final Score: $" + str(money)
 	finalTime.text = "Time in Business: " + str(int(time)) + "s"
 	
 	match currChar:

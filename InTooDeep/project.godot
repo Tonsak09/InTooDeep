@@ -13,7 +13,7 @@ config_version=5
 config/name="InTooDeep"
 run/main_scene="res://Scenes/game_root.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://Textures/icon.svg"
+config/icon="res://Textures/Fish/Peephole - Hallway Only.png"
 
 [display]
 

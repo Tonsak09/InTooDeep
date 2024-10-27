@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=70 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://7v0femhf1ut" path="res://Textures/Fish/Investigator_Drugs_Fish-Eye.png" id="12_vmmaq"]
 [ext_resource type="Texture2D" uid="uid://b236ydijqbnxb" path="res://Textures/Fish/PumpkinKid_Silhouette_Fish-Eye.png" id="13_20tc1"]
 [ext_resource type="Texture2D" uid="uid://ff6s0fqmyq2n" path="res://Textures/Fish/TreeKid_Candy_Fish-Eye.png" id="13_cvjlx"]
+[ext_resource type="Texture2D" uid="uid://b1ihdncgml2jf" path="res://Textures/Fish/KidInvestigator_Silhouette_Fish-Eye.png" id="13_qr48a"]
 [ext_resource type="Texture2D" uid="uid://co0gco6dow23h" path="res://Textures/Fish/TreeKid_Silhouette_Fish-Eye.png" id="14_37mci"]
 [ext_resource type="Texture2D" uid="uid://cdgutgg6uyvin" path="res://Textures/Fish/Peephole - Peephole Only.png" id="14_s8vdd"]
 [ext_resource type="Texture2D" uid="uid://dgd076jesla4m" path="res://Textures/Fish/SusInvestigator_Default_Fish-Eye.png" id="14_xdsbg"]
@@ -31,21 +32,25 @@
 [ext_resource type="Texture2D" uid="uid://4k2wsonx31l5" path="res://Textures/Fish/TrenchcoatKid_Silhouette_Fish-Eye.png" id="16_hhfva"]
 [ext_resource type="Texture2D" uid="uid://dll32igcorruh" path="res://Textures/Fish/PumpkinKid_Drugs_Fish-Eye.png" id="17_4fs4p"]
 [ext_resource type="Texture2D" uid="uid://ctd0kdegid4ou" path="res://Textures/Fish/SusInvestigator_Candy_Fish-Eye.png" id="17_4qbr8"]
+[ext_resource type="Texture2D" uid="uid://dmivodeww47vi" path="res://Textures/Fish/KidInvestigator_Default_Fish-Eye.png" id="17_dxkog"]
 [ext_resource type="Texture2D" uid="uid://m7ame87ft3p4" path="res://Textures/UI.png" id="17_mi82i"]
 [ext_resource type="Texture2D" uid="uid://bqmcq7rj34ue8" path="res://Textures/Fish/TreeKid_Default_Fish-Eye.png" id="17_y7o06"]
 [ext_resource type="Texture2D" uid="uid://c7sc01vy6a2hf" path="res://Textures/Fish/TrenchcoatInvestigator_Candy_Fish-Eye.png" id="18_mrjkv"]
 [ext_resource type="Texture2D" uid="uid://f3ogdwv5rl1w" path="res://Textures/Fish/TreeKid_Drugs_Fish-Eye.png" id="18_r7u31"]
 [ext_resource type="Texture2D" uid="uid://bu0nrm7g3eh4a" path="res://Textures/Fish/TrenchcoatKid_Default_Fish-Eye.png" id="19_saq24"]
 [ext_resource type="Texture2D" uid="uid://o6yrjpkw5u8s" path="res://Textures/Fish/SusInvestigator_Drugs_Fish-Eye.png" id="20_qure4"]
+[ext_resource type="Texture2D" uid="uid://dpenyfpqtelws" path="res://Textures/Fish/KidInvestigator_Candy_Fish-Eye.png" id="21_glyj1"]
 [ext_resource type="Texture2D" uid="uid://bhe6w1p0lj7v3" path="res://Textures/Fish/TrenchcoatInvestigator_Drugs_Fish-Eye.png" id="21_t4kow"]
 [ext_resource type="Texture2D" uid="uid://bjp3t3h0ewkgf" path="res://Textures/Fish/TrenchcoatKid_Candy_Fish-Eye.png" id="22_2qt1s"]
 [ext_resource type="Texture2D" uid="uid://b5iolpu5xt8t3" path="res://Textures/Fish/TrenchcoatKid_Drugs_Fish-Eye.png" id="25_1bv3e"]
+[ext_resource type="Texture2D" uid="uid://bueu4khrvawv3" path="res://Textures/Fish/KidInvestigator_Drugs_Fish-Eye.png" id="25_mgqiv"]
 [ext_resource type="AudioStream" uid="uid://cn4gsysj4w70g" path="res://Audio/Knock1.mp3" id="34_4tdla"]
 [ext_resource type="AudioStream" uid="uid://c3t236ipj0bdc" path="res://Audio/Knock2.mp3" id="35_mdygo"]
 [ext_resource type="AudioStream" uid="uid://cqys3kyhs1kcm" path="res://Audio/Knock3.mp3" id="36_d2tv0"]
 [ext_resource type="Texture2D" uid="uid://c22wl2hu37her" path="res://Textures/Fish/Peephole - Hallway Only.png" id="39_62glc"]
 [ext_resource type="Script" path="res://Scenes/Bob.gd" id="42_deuwj"]
 [ext_resource type="Texture2D" uid="uid://dfqm42idx5udy" path="res://Textures/SpeechBubble.png" id="42_o1vwg"]
+[ext_resource type="AudioStream" uid="uid://bj14b2pp2rev5" path="res://Audio/sb_solace.mp3" id="43_606bc"]
 [ext_resource type="Script" path="res://Scripts/Speech.gd" id="43_it8fs"]
 [ext_resource type="AudioStream" uid="uid://bqtqysjpusse" path="res://Audio/342200__christopherderp__videogame-menu-button-click.wav" id="44_cxrlv"]
 [ext_resource type="AudioStream" uid="uid://c1q6hlstxf2ih" path="res://Audio/582594__nezuai__ui-sound-11.wav" id="45_hmenx"]
@@ -125,10 +130,10 @@ clientOutlineTextures = Array[Texture2D]([ExtResource("2_qqpvf"), ExtResource("3
 clientDisplayTextures = Array[Texture2D]([ExtResource("4_dbux6"), ExtResource("5_xls8j")])
 clientCandyTextures = Array[Texture2D]([ExtResource("6_kh4nt"), ExtResource("7_0accw")])
 clientDrugsTextures = Array[Texture2D]([ExtResource("8_kh0qc"), ExtResource("9_jousc")])
-detectiveOutlineTextures = Array[Texture2D]([ExtResource("10_i3luo"), ExtResource("11_rw200"), ExtResource("12_fp8ag")])
-detectiveDisplayTextures = Array[Texture2D]([ExtResource("11_puyfn"), ExtResource("14_xdsbg"), ExtResource("15_uo82f")])
-detectiveCandyTextures = Array[Texture2D]([ExtResource("11_cbchp"), ExtResource("17_4qbr8"), ExtResource("18_mrjkv")])
-detectiveDrugsTextures = Array[Texture2D]([ExtResource("12_vmmaq"), ExtResource("20_qure4"), ExtResource("21_t4kow")])
+detectiveOutlineTextures = Array[Texture2D]([ExtResource("10_i3luo"), ExtResource("11_rw200"), ExtResource("12_fp8ag"), ExtResource("13_qr48a")])
+detectiveDisplayTextures = Array[Texture2D]([ExtResource("11_puyfn"), ExtResource("14_xdsbg"), ExtResource("15_uo82f"), ExtResource("17_dxkog")])
+detectiveCandyTextures = Array[Texture2D]([ExtResource("11_cbchp"), ExtResource("17_4qbr8"), ExtResource("18_mrjkv"), ExtResource("21_glyj1")])
+detectiveDrugsTextures = Array[Texture2D]([ExtResource("12_vmmaq"), ExtResource("20_qure4"), ExtResource("21_t4kow"), ExtResource("25_mgqiv")])
 childOutlineTextures = Array[Texture2D]([ExtResource("13_20tc1"), ExtResource("14_37mci"), ExtResource("16_hhfva")])
 childDisplayTextures = Array[Texture2D]([ExtResource("16_budfh"), ExtResource("17_y7o06"), ExtResource("19_saq24")])
 childCandyTextures = Array[Texture2D]([ExtResource("15_rcip8"), ExtResource("13_cvjlx"), ExtResource("22_2qt1s")])
@@ -148,7 +153,7 @@ countTimerBar = NodePath("../HallwayFolder/Control/Timebar")
 ditherInCurve = SubResource("Curve_57yx1")
 ditherOutCurve = SubResource("Curve_25ytx")
 characterSprite = NodePath("../HallwayFolder/HallwayRenderables/Character")
-dialogueManager = NodePath("../SpeechBubble")
+dialogueManager = NodePath("../Node2D/SpeechBubble")
 childIntro = Array[String](["Trick or treat!", "Gimme the stuff! *sniffles*", "Trick or treat! ^treat!", "Twick or tweat!", "Twix or twees!"])
 clientIntro = Array[String](["You got the stuff? *coughs*", "Tricks and treats.", "You know why I'm here", "Hand it over", "I'm who you're waiting for"])
 copIntro = Array[String](["Trick or treat.", "Gee, whatcha got here?", "Got the good stuff?", "Oh, don't mind me", "My wife tells me you're the type I'm looking for"])
@@ -184,6 +189,11 @@ one_shot = true
 wait_time = 15.0
 one_shot = true
 autostart = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="GameManager"]
+stream = ExtResource("43_606bc")
+volume_db = -6.176
+autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -232,11 +242,12 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -1.0
-offset_top = 315.0
+offset_top = 243.0
 offset_right = -1.0
-offset_bottom = 315.0
+offset_bottom = 243.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.685, 1.685)
 script = ExtResource("4_usxb0")
 childA = NodePath("Candy")
 childB = NodePath("Contrband")
@@ -333,20 +344,21 @@ label_settings = SubResource("LabelSettings_a17ds")
 
 [node name="Timebar" type="ProgressBar" parent="HallwayFolder/Control"]
 layout_mode = 0
-offset_left = -151.0
-offset_top = 30.0
-offset_right = 152.0
-offset_bottom = 46.435
+offset_left = -150.742
+offset_top = 39.7626
+offset_right = 152.258
+offset_bottom = 56.1976
+scale = Vector2(1, 0.59644)
 max_value = 1.0
 fill_mode = 1
 show_percentage = false
 
 [node name="Money" type="Label" parent="HallwayFolder/Control"]
-layout_mode = 0
-offset_left = -187.0
-offset_top = 165.0
-offset_right = 191.0
-offset_bottom = 213.0
+offset_left = -187.537
+offset_top = -470.03
+offset_right = 190.463
+offset_bottom = -422.03
+text = "0"
 label_settings = SubResource("LabelSettings_psf8a")
 horizontal_alignment = 1
 
@@ -547,13 +559,20 @@ offset_right = -522.0
 offset_bottom = -245.0
 text = "0"
 
-[node name="SpeechBubble" type="Sprite2D" parent="." node_paths=PackedStringArray("textLabel")]
-position = Vector2(-399, -420)
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-399, -387.71)
+scale = Vector2(1.535, 1.535)
+script = ExtResource("42_deuwj")
+range = 0.02
+speed = 5.3
+
+[node name="SpeechBubble" type="Sprite2D" parent="Node2D" node_paths=PackedStringArray("textLabel")]
+scale = Vector2(1, 1)
 texture = ExtResource("42_o1vwg")
 script = ExtResource("43_it8fs")
 textLabel = NodePath("Label")
 
-[node name="Label" type="Label" parent="SpeechBubble"]
+[node name="Label" type="Label" parent="Node2D/SpeechBubble"]
 offset_left = -87.0
 offset_top = -61.0
 offset_right = 86.0
@@ -564,7 +583,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="SpeechBubble"]
+[node name="Timer" type="Timer" parent="Node2D/SpeechBubble"]
 wait_time = 0.01
 autostart = true
 
@@ -578,4 +597,4 @@ autostart = true
 [connection signal="pressed" from="HallwayFolder/Control/Contrband" to="HallwayFolder/Control/Contrband" method="OnClick"]
 [connection signal="pressed" from="HallwayFolder/Buttons/Button3" to="GameManager" method="OnCandyBtn"]
 [connection signal="pressed" from="HallwayFolder/Buttons/Button2" to="GameManager" method="OnContrabandBtn"]
-[connection signal="timeout" from="SpeechBubble/Timer" to="SpeechBubble" method="AddChar"]
+[connection signal="timeout" from="Node2D/SpeechBubble/Timer" to="Node2D/SpeechBubble" method="AddChar"]
