@@ -1,22 +1,29 @@
-[gd_scene load_steps=27 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=34 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
-[ext_resource type="Texture2D" uid="uid://dm3q2pcy21wai" path="res://Textures/Trenchcoat Man.PNG" id="3_cu0so"]
-[ext_resource type="Texture2D" uid="uid://cksdjba1pcfnh" path="res://Textures/Trenchcoat Man - Silhouette.PNG" id="3_extqw"]
-[ext_resource type="Texture2D" uid="uid://ba2hs00yitllj" path="res://Textures/Sus Lady - Silhouette.PNG" id="3_igyjl"]
+[ext_resource type="Texture2D" uid="uid://cpqjxnqiw8h2e" path="res://Textures/Fish/TrenchcoatMan_Silhouette_Fish-Eye.png" id="2_qqpvf"]
+[ext_resource type="Texture2D" uid="uid://bl0ba34xibdqw" path="res://Textures/Fish/SusLady_Silhouette_Fish-Eye.png" id="3_8nkk0"]
 [ext_resource type="Script" path="res://Scripts/BtnUI.gd" id="4_jebci"]
 [ext_resource type="Script" path="res://Scenes/ButtonChildrenManager.gd" id="4_usxb0"]
-[ext_resource type="Texture2D" uid="uid://caji0hxgdsjmu" path="res://Textures/Trenchcoat Man - Candy.PNG" id="4_xq252"]
-[ext_resource type="Texture2D" uid="uid://bn1wuwm7jw4ku" path="res://Textures/UIBtnCandy.png" id="5_hjsf6"]
-[ext_resource type="Texture2D" uid="uid://bsl6p068iuuvk" path="res://Textures/Trenchcoat Man - Drugs.PNG" id="5_qevld"]
-[ext_resource type="Texture2D" uid="uid://dxlqrs1f4r08a" path="res://Textures/Sus Lady.PNG" id="5_v38po"]
 [ext_resource type="FontFile" uid="uid://8eps70trweav" path="res://Font/RobotoSlab-Medium.ttf" id="6_4x8ug"]
-[ext_resource type="Texture2D" uid="uid://d1xgjy88vt0qn" path="res://Textures/Candy.PNG" id="6_sgpyj"]
-[ext_resource type="Texture2D" uid="uid://ccli6ec0pescw" path="res://Textures/Sus Lady - Candy.PNG" id="8_ije2u"]
-[ext_resource type="Texture2D" uid="uid://wdlnlmq3idv4" path="res://Textures/Sus Lady - Drugs.PNG" id="9_87saw"]
-[ext_resource type="Texture2D" uid="uid://flur1b4j4cue" path="res://Textures/UIBtnCont.png" id="9_a1yrp"]
+[ext_resource type="Texture2D" uid="uid://uccnxe00hv14" path="res://Textures/Fish/TrenchcoatMan_Candy_Fish-Eye.png" id="6_kh4nt"]
+[ext_resource type="Texture2D" uid="uid://juxd3fvtyy8a" path="res://Textures/Fish/SusLady_Candy__Fish-Eye.png" id="7_0accw"]
+[ext_resource type="Texture2D" uid="uid://cuonk3uvmtp7s" path="res://Textures/Fish/TrenchcoatMan_Drugs_Fish-Eye.png" id="8_kh0qc"]
+[ext_resource type="Texture2D" uid="uid://obomhthcppmn" path="res://Textures/Fish/SusLady_Drugs_Fish-Eye.png" id="9_jousc"]
+[ext_resource type="Texture2D" uid="uid://bpr0dm4o2dq3w" path="res://Textures/Fish/Investigator_Silhouette_Fish-Eye.png" id="10_i3luo"]
 [ext_resource type="Material" uid="uid://caj4krqp6otrf" path="res://Shaders/CharacterMat.material" id="10_vqmyo"]
+[ext_resource type="Texture2D" uid="uid://dac8fgj5vhtsi" path="res://Textures/Fish/Investigator_Candy_Fish-Eye.png" id="11_cbchp"]
+[ext_resource type="Texture2D" uid="uid://7v0femhf1ut" path="res://Textures/Fish/Investigator_Drugs_Fish-Eye.png" id="12_vmmaq"]
+[ext_resource type="Texture2D" uid="uid://b236ydijqbnxb" path="res://Textures/Fish/PumpkinKid_Silhouette_Fish-Eye.png" id="13_20tc1"]
+[ext_resource type="Texture2D" uid="uid://ff6s0fqmyq2n" path="res://Textures/Fish/TreeKid_Candy_Fish-Eye.png" id="13_cvjlx"]
+[ext_resource type="Texture2D" uid="uid://co0gco6dow23h" path="res://Textures/Fish/TreeKid_Silhouette_Fish-Eye.png" id="14_37mci"]
+[ext_resource type="Texture2D" uid="uid://cdgutgg6uyvin" path="res://Textures/Fish/Peephole - Peephole Only.png" id="14_s8vdd"]
+[ext_resource type="Texture2D" uid="uid://b0yy0k51ek8gl" path="res://Textures/Fish/PumpkinKid_Candy_Fish-Eye.png" id="15_rcip8"]
+[ext_resource type="Texture2D" uid="uid://dll32igcorruh" path="res://Textures/Fish/PumpkinKid_Drugs_Fish-Eye.png" id="17_4fs4p"]
+[ext_resource type="Texture2D" uid="uid://m7ame87ft3p4" path="res://Textures/UI.png" id="17_mi82i"]
+[ext_resource type="Texture2D" uid="uid://brtts2y1v230k" path="res://Textures/Fish/Peephole.png" id="18_6ek5o"]
+[ext_resource type="Texture2D" uid="uid://f3ogdwv5rl1w" path="res://Textures/Fish/TreeKid_Drugs_Fish-Eye.png" id="18_r7u31"]
 
 [sub_resource type="Curve" id="Curve_57yx1"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -46,7 +53,7 @@ point_count = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_a17ds"]
 font = ExtResource("6_4x8ug")
-font_size = 14
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Curve" id="Curve_afi8x"]
@@ -55,22 +62,22 @@ point_count = 2
 
 [node name="GameRoot" type="Node2D"]
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("startScreen", "btns", "contAdvice", "inside", "knockAudio", "ditherTimer", "pauseTimer", "characterSprite", "stateLabel", "charLabel", "moneyLabel")]
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("startScreen", "btns", "contAdvice", "inside", "knockAudio", "ditherTimer", "pauseTimer", "countdownTimer", "countTimerBar", "characterSprite", "stateLabel", "charLabel", "moneyLabel")]
 script = ExtResource("2_cxvrx")
 moneyGain = 60.0
 moneyLoss = 25.0
-clientOutlineTextures = Array[Texture2D]([ExtResource("3_extqw"), ExtResource("3_igyjl")])
-clientDisplayTextures = Array[Texture2D]([ExtResource("3_cu0so"), ExtResource("5_v38po")])
-clientCandyTextures = Array[Texture2D]([ExtResource("4_xq252"), ExtResource("8_ije2u")])
-clientDrugsTextures = Array[Texture2D]([ExtResource("5_qevld"), ExtResource("9_87saw")])
-detectiveOutlineTextures = Array[Texture2D]([ExtResource("3_igyjl")])
-detectiveDisplayTextures = Array[Texture2D]([ExtResource("5_v38po")])
-detectiveCandyTextures = Array[Texture2D]([ExtResource("8_ije2u")])
-detectiveDrugsTextures = Array[Texture2D]([ExtResource("9_87saw")])
-childOutlineTextures = Array[Texture2D]([ExtResource("3_extqw")])
-childDisplayTextures = Array[Texture2D]([ExtResource("3_cu0so")])
-childCandyTextures = Array[Texture2D]([ExtResource("4_xq252")])
-childDrugsTextures = Array[Texture2D]([ExtResource("5_qevld")])
+clientOutlineTextures = Array[Texture2D]([ExtResource("2_qqpvf"), ExtResource("3_8nkk0")])
+clientDisplayTextures = Array[Texture2D]([ExtResource("2_qqpvf"), ExtResource("3_8nkk0")])
+clientCandyTextures = Array[Texture2D]([ExtResource("6_kh4nt"), ExtResource("7_0accw")])
+clientDrugsTextures = Array[Texture2D]([ExtResource("8_kh0qc"), ExtResource("9_jousc")])
+detectiveOutlineTextures = Array[Texture2D]([ExtResource("10_i3luo")])
+detectiveDisplayTextures = Array[Texture2D]([ExtResource("10_i3luo")])
+detectiveCandyTextures = Array[Texture2D]([ExtResource("11_cbchp")])
+detectiveDrugsTextures = Array[Texture2D]([ExtResource("12_vmmaq")])
+childOutlineTextures = Array[Texture2D]([ExtResource("13_20tc1"), ExtResource("14_37mci")])
+childDisplayTextures = Array[Texture2D]([ExtResource("13_20tc1"), ExtResource("14_37mci")])
+childCandyTextures = Array[Texture2D]([ExtResource("15_rcip8"), ExtResource("13_cvjlx")])
+childDrugsTextures = Array[Texture2D]([ExtResource("17_4fs4p"), ExtResource("18_r7u31")])
 startScreen = NodePath("../StartScreen")
 btns = NodePath("../HallwayFolder/Control")
 contAdvice = NodePath("../HallwayFolder/Contninue Advice")
@@ -78,9 +85,11 @@ inside = NodePath("../InsideFolder")
 knockAudio = NodePath("KnockAudio")
 ditherTimer = NodePath("DitherTimer")
 pauseTimer = NodePath("PauseDisplayTimer")
+countdownTimer = NodePath("Countdown Timer")
+countTimerBar = NodePath("../HallwayFolder/Control/Timebar")
 ditherInCurve = SubResource("Curve_57yx1")
 ditherOutCurve = SubResource("Curve_25ytx")
-characterSprite = NodePath("../HallwayFolder/Character")
+characterSprite = NodePath("../HallwayFolder/HallwayRenderables/Character")
 stateLabel = NodePath("../DebugInfo/StateLabel")
 charLabel = NodePath("../DebugInfo/CharacterLabel")
 moneyLabel = NodePath("../DebugInfo/MoneyLabel")
@@ -93,6 +102,10 @@ one_shot = true
 
 [node name="PauseDisplayTimer" type="Timer" parent="GameManager"]
 one_shot = true
+
+[node name="Countdown Timer" type="Timer" parent="GameManager"]
+wait_time = 15.0
+autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -119,23 +132,34 @@ label_settings = SubResource("LabelSettings_ivfw8")
 [node name="HallwayFolder" type="Node2D" parent="."]
 
 [node name="Hallway" type="Sprite2D" parent="HallwayFolder"]
-
-[node name="Character" type="Sprite2D" parent="HallwayFolder"]
 visible = false
+
+[node name="HallwayRenderables" type="Node2D" parent="HallwayFolder"]
+position = Vector2(0, -105.68)
+scale = Vector2(0.76, 0.76)
+
+[node name="PeepholeHall" type="Sprite2D" parent="HallwayFolder/HallwayRenderables"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("18_6ek5o")
+
+[node name="Character" type="Sprite2D" parent="HallwayFolder/HallwayRenderables"]
 material = ExtResource("10_vqmyo")
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_extqw")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("13_cvjlx")
+
+[node name="PeepholeFront" type="Sprite2D" parent="HallwayFolder/HallwayRenderables"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_s8vdd")
 
 [node name="Control" type="Control" parent="HallwayFolder" node_paths=PackedStringArray("childA", "childB")]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -1.0
-offset_top = 97.0
+offset_top = 315.0
 offset_right = -1.0
-offset_bottom = 97.0
+offset_bottom = 315.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_usxb0")
@@ -145,7 +169,8 @@ childB = NodePath("Contrband")
 [node name="Candy" type="Button" parent="HallwayFolder/Control" node_paths=PackedStringArray("clickTimer")]
 clip_contents = true
 layout_mode = 0
-offset_left = -104.0
+offset_left = -105.0
+offset_right = -1.0
 offset_bottom = 208.0
 theme_override_colors/icon_normal_color = Color(0.933333, 0.4, 0.65098, 1)
 theme_override_colors/icon_pressed_color = Color(0.933333, 0.4, 0.65098, 1)
@@ -168,35 +193,26 @@ one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="HallwayFolder/Control/Candy"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 204.0
-offset_bottom = 204.0
-texture = ExtResource("5_hjsf6")
+offset_left = -23.0
+offset_top = -16.0
+offset_right = 177.0
+offset_bottom = 184.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("17_mi82i")
 
 [node name="Label" type="Label" parent="HallwayFolder/Control/Candy"]
 layout_mode = 0
-offset_left = 36.0
+offset_left = 24.0
 offset_top = 95.0
-offset_right = 91.0
-offset_bottom = 118.0
+offset_right = 88.0
+offset_bottom = 119.0
 text = "CANDY"
 label_settings = SubResource("LabelSettings_a17ds")
 
-[node name="TextureRect2" type="TextureRect" parent="HallwayFolder/Control/Candy"]
-visible = false
-layout_mode = 0
-offset_left = 24.0
-offset_top = 66.0
-offset_right = 524.0
-offset_bottom = 566.0
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("6_sgpyj")
-
 [node name="Contrband" type="Button" parent="HallwayFolder/Control" node_paths=PackedStringArray("clickTimer")]
 clip_contents = true
-offset_left = 104.0
-offset_right = 208.0
+offset_left = 115.0
+offset_right = 219.0
 offset_bottom = 208.0
 scale = Vector2(-1, 1)
 theme_override_colors/icon_normal_color = Color(0.933333, 0.4, 0.65098, 1)
@@ -220,20 +236,31 @@ one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="HallwayFolder/Control/Contrband"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 234.0
-offset_bottom = 204.0
-texture = ExtResource("9_a1yrp")
+offset_left = -17.405
+offset_top = -16.0
+offset_right = 182.595
+offset_bottom = 184.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("17_mi82i")
 
 [node name="Label" type="Label" parent="HallwayFolder/Control/Contrband"]
-offset_left = 87.0
+offset_left = 92.0
 offset_top = 95.0
-offset_right = 198.0
-offset_bottom = 118.0
+offset_right = 203.0
+offset_bottom = 119.0
 scale = Vector2(-1, 1)
 text = "DRUGS"
 label_settings = SubResource("LabelSettings_a17ds")
+
+[node name="Timebar" type="ProgressBar" parent="HallwayFolder/Control"]
+layout_mode = 0
+offset_left = -151.0
+offset_top = 30.0
+offset_right = 152.0
+offset_bottom = 46.435
+max_value = 1.0
+fill_mode = 1
+show_percentage = false
 
 [node name="Buttons" type="Control" parent="HallwayFolder"]
 visible = false

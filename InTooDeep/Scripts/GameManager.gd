@@ -51,6 +51,8 @@ enum GameStates
 @export_category("Timers")
 @export var ditherTimer : Timer
 @export var pauseTimer : Timer 
+@export var countdownTimer : Timer 
+@export var countTimerBar : ProgressBar
 
 @export_category("Curves")
 @export var ditherInCurve : Curve
@@ -123,6 +125,14 @@ func DebugHelper():
 	moneyLabel.text = str(money)
 
 func StateMachine():
+	
+	if gameState != GameStates.START_SCREEN && gameState != GameStates.GAME_OVER:
+		var interp = countdownTimer.time_left / countdownTimer.wait_time
+		countTimerBar.value = interp
+		print_debug(interp)
+		if interp <= 0.0:
+			gameState = GameStates.GAME_OVER
+	
 	match gameState:
 		GameStates.START_SCREEN:
 			StartScreen_State()
@@ -181,7 +191,7 @@ func OutlineCharacter_State():
 # Reveals what the player's choice resulted
 # in 
 func ResultCharacter_State():
-	
+	countdownTimer.paused = true
 	if pauseTimer.is_stopped():
 		contAdvice.visible = true 
 		
@@ -233,14 +243,31 @@ func FadingToIn_State():
 
 # Game over stats fade in over screen 
 func GameOver_State():
-	pass
+	match currChar:
+			CharacterType.CHILD: 
+				if isCandy:
+					SetCharacterTexture(childCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(childDrugsTextures[charVarient])
+			CharacterType.CLIENT:
+				if isCandy:
+					SetCharacterTexture(clientCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(clientDrugsTextures[charVarient])
+			CharacterType.COP:
+				if isCandy:
+					SetCharacterTexture(detectiveCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(detectiveDrugsTextures[charVarient])
 
 
 
 func ResetGame():
 	var character = randi_range(0, 2) 
 	currChar = character
-	
+	countdownTimer.paused = false
+	countdownTimer.start()
+	 
 	# Set charactter texture 
 	match currChar:
 		CharacterType.CHILD:
