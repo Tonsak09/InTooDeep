@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=73 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
@@ -55,6 +55,9 @@
 [ext_resource type="AudioStream" uid="uid://bqtqysjpusse" path="res://Audio/342200__christopherderp__videogame-menu-button-click.wav" id="44_cxrlv"]
 [ext_resource type="AudioStream" uid="uid://c1q6hlstxf2ih" path="res://Audio/582594__nezuai__ui-sound-11.wav" id="45_hmenx"]
 [ext_resource type="AudioStream" uid="uid://bf1qgqbrsxfj4" path="res://Audio/582595__nezuai__ui-sound-10.wav" id="46_wtbat"]
+[ext_resource type="Script" path="res://Scenes/Mouse.gd" id="56_abd42"]
+[ext_resource type="Texture2D" uid="uid://goy5tbdqbeje" path="res://Textures/IMG_4183.png" id="57_os0g1"]
+[ext_resource type="Texture2D" uid="uid://dtvnaytfv43yk" path="res://Textures/IMG_4184.png" id="58_bjepx"]
 
 [sub_resource type="Curve" id="Curve_57yx1"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -586,6 +589,18 @@ autowrap_mode = 2
 [node name="Timer" type="Timer" parent="Node2D/SpeechBubble"]
 wait_time = 0.01
 autostart = true
+
+[node name="Cursor" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("56_abd42")
+sprite = NodePath("Sprite2D")
+holdTexture = ExtResource("57_os0g1")
+clickTexture = ExtResource("58_bjepx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+z_index = 5
+position = Vector2(40, 81)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("57_os0g1")
 
 [connection signal="mouse_entered" from="HallwayFolder/Control/Candy" to="HallwayFolder/Control/Candy" method="OnHover"]
 [connection signal="mouse_exited" from="HallwayFolder/Control/Candy" to="HallwayFolder/Control/Candy" method="OnLeave"]

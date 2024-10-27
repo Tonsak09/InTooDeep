@@ -207,6 +207,35 @@ func OutlineCharacter_State():
 # in 
 func ResultCharacter_State():
 	countdownTimer.paused = true
+	
+	if pauseTimer.time_left <= pauseTimer.wait_time / 2.0:
+		match currChar:
+			CharacterType.CHILD: 
+				if isCandy:
+					SetCharacterTexture(childCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(childDrugsTextures[charVarient])
+			CharacterType.CLIENT:
+				if isCandy:
+					SetCharacterTexture(clientCandyTextures[charVarient])
+					badAudio.play()
+				else:
+					SetCharacterTexture(clientDrugsTextures[charVarient])
+			CharacterType.COP:
+				if isCandy:
+					SetCharacterTexture(detectiveCandyTextures[charVarient])
+				else:
+					SetCharacterTexture(detectiveDrugsTextures[charVarient])
+	else:
+		match currChar:
+			CharacterType.CHILD:
+				SetCharacterTexture(childDisplayTextures[charVarient])
+			CharacterType.CLIENT:
+				SetCharacterTexture(clientDisplayTextures[charVarient])
+			CharacterType.COP:
+				SetCharacterTexture(detectiveDisplayTextures[charVarient])
+	
+	
 	if pauseTimer.is_stopped():
 		contAdvice.visible = true 
 		
@@ -240,13 +269,7 @@ func ResultCharacter_State():
 			gameState = GameStates.GAME_OVER
 			
 	else:
-		match currChar:
-			CharacterType.CHILD:
-				SetCharacterTexture(childDisplayTextures[charVarient])
-			CharacterType.CLIENT:
-				SetCharacterTexture(clientDisplayTextures[charVarient])
-			CharacterType.COP:
-				SetCharacterTexture(detectiveDisplayTextures[charVarient])
+		pass
 
 # Character fades away along with key hole.
 # Then door fades back in 
