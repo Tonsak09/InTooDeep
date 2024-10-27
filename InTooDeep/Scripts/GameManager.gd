@@ -98,7 +98,7 @@ var roundCount : int
 func _ready():
 	isCorrect = true 
 	isCandy = true 
-	money = 50.0;
+	money = 0.0;
 
 func _process(delta):
 	StateMachine(delta)
@@ -220,6 +220,7 @@ func ResultCharacter_State():
 			CharacterType.CLIENT:
 				if isCandy:
 					SetCharacterTexture(clientCandyTextures[charVarient])
+					badAudio.play()
 				else:
 					SetCharacterTexture(clientDrugsTextures[charVarient])
 			CharacterType.COP:
@@ -283,6 +284,8 @@ func GameOver_State():
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		gameOver.visible = false
 		roundCount = 0
+		time = 0
+		money = 0
 		
 		ResetGame()
 		gameState = GameStates.START_SCREEN

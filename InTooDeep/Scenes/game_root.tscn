@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=65 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://ctd0kdegid4ou" path="res://Textures/Fish/SusInvestigator_Candy_Fish-Eye.png" id="17_4qbr8"]
 [ext_resource type="Texture2D" uid="uid://m7ame87ft3p4" path="res://Textures/UI.png" id="17_mi82i"]
 [ext_resource type="Texture2D" uid="uid://bqmcq7rj34ue8" path="res://Textures/Fish/TreeKid_Default_Fish-Eye.png" id="17_y7o06"]
-[ext_resource type="Texture2D" uid="uid://brtts2y1v230k" path="res://Textures/Fish/Peephole.png" id="18_6ek5o"]
 [ext_resource type="Texture2D" uid="uid://c7sc01vy6a2hf" path="res://Textures/Fish/TrenchcoatInvestigator_Candy_Fish-Eye.png" id="18_mrjkv"]
 [ext_resource type="Texture2D" uid="uid://f3ogdwv5rl1w" path="res://Textures/Fish/TreeKid_Drugs_Fish-Eye.png" id="18_r7u31"]
 [ext_resource type="Texture2D" uid="uid://bu0nrm7g3eh4a" path="res://Textures/Fish/TrenchcoatKid_Default_Fish-Eye.png" id="19_saq24"]
@@ -44,6 +43,8 @@
 [ext_resource type="AudioStream" uid="uid://cn4gsysj4w70g" path="res://Audio/Knock1.mp3" id="34_4tdla"]
 [ext_resource type="AudioStream" uid="uid://c3t236ipj0bdc" path="res://Audio/Knock2.mp3" id="35_mdygo"]
 [ext_resource type="AudioStream" uid="uid://cqys3kyhs1kcm" path="res://Audio/Knock3.mp3" id="36_d2tv0"]
+[ext_resource type="Texture2D" uid="uid://c22wl2hu37her" path="res://Textures/Fish/Peephole - Hallway Only.png" id="39_62glc"]
+[ext_resource type="Script" path="res://Scenes/Bob.gd" id="42_deuwj"]
 [ext_resource type="Texture2D" uid="uid://dfqm42idx5udy" path="res://Textures/SpeechBubble.png" id="42_o1vwg"]
 [ext_resource type="Script" path="res://Scripts/Speech.gd" id="43_it8fs"]
 [ext_resource type="AudioStream" uid="uid://bqtqysjpusse" path="res://Audio/342200__christopherderp__videogame-menu-button-click.wav" id="44_cxrlv"]
@@ -161,6 +162,10 @@ moneyLabel = NodePath("../DebugInfo/MoneyLabel")
 position = Vector2(-1, 315)
 stream = ExtResource("45_hmenx")
 
+[node name="MoneyAudio" type="AudioStreamPlayer2D" parent="GameManager"]
+position = Vector2(-1, 315)
+stream = ExtResource("45_hmenx")
+
 [node name="BadAudio" type="AudioStreamPlayer2D" parent="GameManager"]
 position = Vector2(-1, 315)
 stream = ExtResource("46_wtbat")
@@ -193,7 +198,7 @@ scale = Vector2(0.76, 0.76)
 
 [node name="PeepholeHall" type="Sprite2D" parent="HallwayFolder/HallwayRenderables"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("18_6ek5o")
+texture = ExtResource("39_62glc")
 
 [node name="Character" type="Sprite2D" parent="HallwayFolder/HallwayRenderables"]
 material = ExtResource("10_vqmyo")
@@ -203,6 +208,23 @@ texture = ExtResource("13_cvjlx")
 [node name="PeepholeFront" type="Sprite2D" parent="HallwayFolder/HallwayRenderables"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_s8vdd")
+script = ExtResource("42_deuwj")
+range = 0.05
+speed = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="HallwayFolder/HallwayRenderables/PeepholeFront"]
+offset_left = -2816.0
+offset_top = -2496.0
+offset_right = 2668.0
+offset_bottom = -1058.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="HallwayFolder/HallwayRenderables/PeepholeFront"]
+offset_left = -2657.89
+offset_top = 1054.42
+offset_right = 2826.11
+offset_bottom = 2492.42
+color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="HallwayFolder" node_paths=PackedStringArray("childA", "childB")]
 layout_mode = 3
