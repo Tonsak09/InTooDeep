@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://be15r5shbc81"
+path="res://.godot/imported/ClientMale_Annoyed.mp3-7970ab92ad5ceffd5d7224261296f59e.mp3str"
+
+[deps]
+
+source_file="res://Audio/Character Noises/ClientMale_Annoyed.mp3"
+dest_files=["res://.godot/imported/ClientMale_Annoyed.mp3-7970ab92ad5ceffd5d7224261296f59e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

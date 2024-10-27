@@ -48,6 +48,10 @@ enum GameStates
 @export var goodAudio : AudioStreamPlayer2D
 @export var badAudio : AudioStreamPlayer2D
 
+@export var childPleased : AudioStreamPlayer2D
+@export var inspectAnnoyed : AudioStreamPlayer2D
+@export var inspectCaught : AudioStreamPlayer2D
+
 @export_category("Timers")
 @export var ditherTimer : Timer
 @export var pauseTimer : Timer 
@@ -257,6 +261,7 @@ func ResultCharacter_State():
 					SetCharacterTexture(detectiveCandyTextures[charVarient])
 				else:
 					SetCharacterTexture(detectiveDrugsTextures[charVarient])
+					
 		
 		# Check bool if correct or incorrect 
 		contAdvice.visible = false 
@@ -354,6 +359,7 @@ func OnCandyBtn():
 		CharacterType.CHILD:
 			gameState = GameStates.RESULT_CHARACTER
 			pauseTimer.start()
+			childPleased.play()
 		CharacterType.CLIENT:
 			money -= moneyLoss
 			gameState = GameStates.RESULT_CHARACTER 
@@ -377,6 +383,7 @@ func OnContrabandBtn():
 			gameState = GameStates.RESULT_CHARACTER
 			pauseTimer.start()
 		CharacterType.COP:
+			inspectAnnoyed.play()
 			gameState = GameStates.GAME_OVER 
 			badAudio.play()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://blhh6cl2k2y85"]
+[gd_scene load_steps=79 format=3 uid="uid://blhh6cl2k2y85"]
 
 [ext_resource type="FontFile" uid="uid://b3arjoydquu8s" path="res://Font/JuniperoSans-Regular.otf" id="1_sn0vu"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_cxvrx"]
@@ -52,8 +52,12 @@
 [ext_resource type="Texture2D" uid="uid://dfqm42idx5udy" path="res://Textures/SpeechBubble.png" id="42_o1vwg"]
 [ext_resource type="AudioStream" uid="uid://bj14b2pp2rev5" path="res://Audio/sb_solace.mp3" id="43_606bc"]
 [ext_resource type="Script" path="res://Scripts/Speech.gd" id="43_it8fs"]
+[ext_resource type="AudioStream" uid="uid://dwkd3fwbpbk61" path="res://Audio/Character Noises/Child_Pleased.mp3" id="44_53lav"]
 [ext_resource type="AudioStream" uid="uid://bqtqysjpusse" path="res://Audio/342200__christopherderp__videogame-menu-button-click.wav" id="44_cxrlv"]
+[ext_resource type="AudioStream" uid="uid://d44taov3aplr" path="res://Audio/Character Noises/Inspector_Annoyed2.mp3" id="44_tm76i"]
 [ext_resource type="AudioStream" uid="uid://c1q6hlstxf2ih" path="res://Audio/582594__nezuai__ui-sound-11.wav" id="45_hmenx"]
+[ext_resource type="AudioStream" uid="uid://d4fvebdfcmb11" path="res://Audio/Character Noises/Inspector_Annoyed4.mp3" id="45_n8m4q"]
+[ext_resource type="AudioStream" uid="uid://kyteqsq2mll7" path="res://Audio/Character Noises/Inspector_Annoyed.mp3" id="46_ih7ms"]
 [ext_resource type="AudioStream" uid="uid://bf1qgqbrsxfj4" path="res://Audio/582595__nezuai__ui-sound-10.wav" id="46_wtbat"]
 [ext_resource type="Script" path="res://Scenes/Mouse.gd" id="56_abd42"]
 [ext_resource type="Texture2D" uid="uid://goy5tbdqbeje" path="res://Textures/IMG_4183.png" id="57_os0g1"]
@@ -75,6 +79,17 @@ stream_1/stream = ExtResource("35_mdygo")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("36_d2tv0")
 stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xmuv3"]
+streams_count = 3
+stream_0/stream = ExtResource("44_tm76i")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("45_n8m4q")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("46_ih7ms")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o07wf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u57l6"]
 
@@ -124,7 +139,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="GameRoot" type="Node2D"]
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("moneyDis", "startScreen", "btns", "contAdvice", "inside", "gameOver", "knockAudio", "goodAudio", "badAudio", "ditherTimer", "pauseTimer", "countdownTimer", "countTimerBar", "characterSprite", "dialogueManager", "finalScore", "finalTime", "stateLabel", "charLabel", "moneyLabel")]
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("moneyDis", "startScreen", "btns", "contAdvice", "inside", "gameOver", "knockAudio", "goodAudio", "badAudio", "childPleased", "inspectAnnoyed", "inspectCaught", "ditherTimer", "pauseTimer", "countdownTimer", "countTimerBar", "characterSprite", "dialogueManager", "finalScore", "finalTime", "stateLabel", "charLabel", "moneyLabel")]
 script = ExtResource("2_cxvrx")
 moneyGain = 60.0
 moneyLoss = 25.0
@@ -149,6 +164,9 @@ gameOver = NodePath("../EndScreen")
 knockAudio = NodePath("KnockAudio")
 goodAudio = NodePath("GoodAudio")
 badAudio = NodePath("BadAudio")
+childPleased = NodePath("Node2D/ChildPleased")
+inspectAnnoyed = NodePath("Node2D/InspectorAnnoyed")
+inspectCaught = NodePath("Node2D/InspectorCaught")
 ditherTimer = NodePath("DitherTimer")
 pauseTimer = NodePath("PauseDisplayTimer")
 countdownTimer = NodePath("Countdown Timer")
@@ -197,6 +215,19 @@ autostart = true
 stream = ExtResource("43_606bc")
 volume_db = -6.176
 autoplay = true
+
+[node name="Node2D" type="Node2D" parent="GameManager"]
+
+[node name="ChildPleased" type="AudioStreamPlayer2D" parent="GameManager/Node2D"]
+stream = ExtResource("44_53lav")
+volume_db = 10.0
+
+[node name="InspectorAnnoyed" type="AudioStreamPlayer2D" parent="GameManager/Node2D"]
+stream = SubResource("AudioStreamRandomizer_xmuv3")
+volume_db = 10.0
+
+[node name="InspectorCaught" type="AudioStreamPlayer2D" parent="GameManager/Node2D"]
+stream = SubResource("AudioStreamRandomizer_o07wf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

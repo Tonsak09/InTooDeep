@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kyteqsq2mll7"
+path="res://.godot/imported/Inspector_Annoyed.mp3-adfa71fd68490124c4bfa8ac0d45c679.mp3str"
+
+[deps]
+
+source_file="res://Audio/Character Noises/Inspector_Annoyed.mp3"
+dest_files=["res://.godot/imported/Inspector_Annoyed.mp3-adfa71fd68490124c4bfa8ac0d45c679.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
